@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:wu="http://www.lontologie.com/schema/student/spring-student"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.lontologie.com/schema/student/spring-student http://www.lontologie.com/schema/student/spring-student/student.xsd">
+
+	<!--	<bean id="user" name="user" class="com.leiyue.example.selflabel.User">-->
+	<!--		<property name="name" value="yuelei"></property>-->
+	<!--		<property name="address" value="北京市_丰台区_丰台南路"></property>-->
+	<!--	</bean>-->
+	<bean id="car" class="com.leiyue.example.factorybean.MyCarFactoryBean">
+		<property name="carInfo" value="大黄蜂,红旗,一千万"></property>
+	</bean>
+	<wu:student id="lalala" name="la" email="lalal"/>
+</beans>
