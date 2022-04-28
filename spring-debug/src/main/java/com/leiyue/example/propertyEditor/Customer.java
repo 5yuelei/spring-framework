@@ -1,25 +1,15 @@
-package com.leiyue.example.selflabel;
+package com.leiyue.example.propertyEditor;
 
-
-/**
- * 用户测试类
- */
-public class User {
-	/**
-	 *
-	 */
+public class Customer {
 	private String name;
-	/**
-	 *
-	 */
 	private Address address;
 
-	public User(String name, Address address) {
-		this.name = name;
-		this.address = address;
-	}
-
-	public User() {
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"name='" + name + '\'' +
+				", address=" + address +
+				'}';
 	}
 
 	public String getName() {
