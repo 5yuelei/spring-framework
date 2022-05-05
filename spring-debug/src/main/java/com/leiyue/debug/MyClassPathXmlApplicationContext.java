@@ -1,10 +1,9 @@
 package com.leiyue.debug;
 
+import com.leiyue.example.beanFactoryPostProcessor.MyBeanFactoryPostProcessor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.MutablePropertySources;
 
 public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationContext {
 
@@ -18,10 +17,11 @@ public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationCon
 //		environment.setRequiredProperties("OS");
 //	}
 //
-//	@Override
-//	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
-//		super.setAllowBeanDefinitionOverriding(true);
-//		super.setAllowCircularReferences(true);
-//		super.customizeBeanFactory(beanFactory);
-//	}
+	@Override
+	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
+		super.setAllowBeanDefinitionOverriding(true);
+		super.setAllowCircularReferences(true);
+		super.customizeBeanFactory(beanFactory);
+		super.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor());
+	}
 }
