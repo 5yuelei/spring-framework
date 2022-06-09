@@ -226,11 +226,13 @@ final class PostProcessorRegistrationDelegate {
 		// Register BeanPostProcessorChecker that logs an info message when
 		// a bean is created during BeanPostProcessor instantiation, i.e. when
 		// a bean is not eligible for getting processed by all BeanPostProcessors.
+//		+ 1 因为此方法最后会添加一个BeanPostProcessorChecker类
 		int beanProcessorTargetCount = beanFactory.getBeanPostProcessorCount() + 1 + postProcessorNames.length;
 		beanFactory.addBeanPostProcessor(new BeanPostProcessorChecker(beanFactory, beanProcessorTargetCount));
 
 		// Separate between BeanPostProcessors that implement PriorityOrdered,
 		// Ordered, and the rest.
+//		TODO 熟悉的排序 priorityOrderedPostProcessors
 		List<BeanPostProcessor> priorityOrderedPostProcessors = new ArrayList<>();
 		List<BeanPostProcessor> internalPostProcessors = new ArrayList<>();
 		List<String> orderedPostProcessorNames = new ArrayList<>();
@@ -396,11 +398,23 @@ final class PostProcessorRegistrationDelegate {
 			this.beanPostProcessorTargetCount = beanPostProcessorTargetCount;
 		}
 
+		/**
+		 * 后置处理器的before方法，do nothing and return bean
+		 * @param bean the new bean instance
+		 * @param beanName the name of the bean
+		 * @return
+		 */
 		@Override
 		public Object postProcessBeforeInitialization(Object bean, String beanName) {
 			return bean;
 		}
 
+		/**
+		 * 后置处理器的after方法，用来判断哪些是不需要检测的bean
+		 * @param bean the new bean instance
+		 * @param beanName the name of the bean
+		 * @return
+		 */
 		@Override
 		public Object postProcessAfterInitialization(Object bean, String beanName) {
 			if (!(bean instanceof BeanPostProcessor) && !isInfrastructureBean(beanName) &&
@@ -414,6 +428,11 @@ final class PostProcessorRegistrationDelegate {
 			return bean;
 		}
 
+		/**
+		 * 检测当前的bean是不是spring自己的bean
+		 * @param beanName
+		 * @return
+		 */
 		private boolean isInfrastructureBean(@Nullable String beanName) {
 			if (beanName != null && this.beanFactory.containsBeanDefinition(beanName)) {
 				BeanDefinition bd = this.beanFactory.getBeanDefinition(beanName);

@@ -195,6 +195,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 	private boolean synthetic = false;
 
+	/**
+	 * 定义这个bean的应用，application：用户，infrastructure：完全内部使用，与用户无关
+	 */
 	private int role = BeanDefinition.ROLE_APPLICATION;
 
 	@Nullable
